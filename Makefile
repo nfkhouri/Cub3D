@@ -10,14 +10,16 @@ PATH_MLX = ./mlx_linux/
 
 PATH_SRCS = ./srcs/
 
-SRCS = main.c
+SRCS = main.c\
+	first_steps.c\
+	player_move.c
 
 OBJS = $(addprefix $(PATH_SRCS),$(SRCS:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror
 FLAGS_MLX = -lm -lX11 -lXext -lbsd
 
-CC = gcc $(FLAGS)
+CC = gcc -g $(FLAGS)
 
 .c.o:
 	gcc $(FLAGS) -I$(PATH_GNL) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
