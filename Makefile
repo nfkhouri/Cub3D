@@ -22,7 +22,7 @@ FLAGS_MLX = -lm -lX11 -lXext -lbsd
 CC = gcc -g $(FLAGS)
 
 .c.o:
-	gcc $(FLAGS) -I$(PATH_GNL) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
+	gcc -g $(FLAGS) -I$(PATH_GNL) -I$(PATH_LIBFT) -I$(PATH_MLX) -c $< -o ${<:.c=.o}
 
 all: $(NAME)
 

@@ -3,6 +3,11 @@
 #include "libft.h"
 #include <stdio.h>
 
+void ft_inti_structs(t_vars *vars)
+{
+    *vars = (t_vars){0};
+}
+
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color)
 {
     char *dst;
@@ -13,20 +18,49 @@ void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color)
 
 void ft_draw_in_buffer(t_vars *vars)
 {
-    int x = 50;
-    int y = 50;
+    // int x = 50;
+    // int y = 50;
 
-    while (x < 50)
+    // while (x < 50)
+    // {
+    //     while (y < 50)
+    //     {
+    //         ft_print_pixel_in_buffer(vars, x, y, 0x00FF0000);
+    //         y++;
+    //     }
+    //     y = 0;
+    //     x++;
+    // }
+    // mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 50, 50);
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    
+    while(i < S_WIDTH)
     {
-        while (y < 50)
+        while(j < S_HEIGHT)
         {
-            ft_print_pixel_in_buffer(vars, x, y, 0x00FF0000);
-            y++;
+            ft_print_pixel_in_buffer(vars, i, j, 0x00000000);
+            j++;
         }
-        y = 0;
-        x++;
+        j = 0;
+        i++;
     }
-    mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 50, 50);
+    i = vars->move.x;
+    j = vars->move.y;
+    while (i < vars->move.x + 5)
+    {
+        while (j < vars->move.y + 5)
+        {
+            ft_print_pixel_in_buffer(vars, i, j, 0x00FF0000);
+            j++;
+        }
+        j = vars->move.y;
+        i++;
+    }
+    mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
 }
 
 int ft_key_press(int keycode, t_vars *vars)

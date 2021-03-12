@@ -49,3 +49,4 @@ int ft_x_close(t_vars *vars);
 int ft_move(t_vars *vars);
 int ft_draw(t_vars *vars);
 int main_loop(t_vars *vars);
+void ft_inti_structs(t_vars *vars);
