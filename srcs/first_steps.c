@@ -18,20 +18,6 @@ void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color)
 
 void ft_draw_in_buffer(t_vars *vars)
 {
-    // int x = 50;
-    // int y = 50;
-
-    // while (x < 50)
-    // {
-    //     while (y < 50)
-    //     {
-    //         ft_print_pixel_in_buffer(vars, x, y, 0x00FF0000);
-    //         y++;
-    //     }
-    //     y = 0;
-    //     x++;
-    // }
-    // mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 50, 50);
     int i;
     int j;
 
@@ -48,16 +34,16 @@ void ft_draw_in_buffer(t_vars *vars)
         j = 0;
         i++;
     }
-    i = vars->move.x;
-    j = vars->move.y;
-    while (i < vars->move.x + 5)
+    i = vars->player.x;
+    j = vars->player.y;
+    while (i < vars->player.x + PLAYER_SIZE)
     {
-        while (j < vars->move.y + 5)
+        while (j < vars->player.y + PLAYER_SIZE)
         {
             ft_print_pixel_in_buffer(vars, i, j, 0x00FF0000);
             j++;
         }
-        j = vars->move.y;
+        j = vars->player.y;
         i++;
     }
     mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
@@ -72,26 +58,26 @@ int ft_key_press(int keycode, t_vars *vars)
         exit(0);
     }
     if (keycode == KEY_LEFT)
-        vars->move.left = 1;
+        vars->player.left = 1;
     if (keycode == KEY_RIGHT)
-        vars->move.right = 1;
+        vars->player.right = 1;
     if (keycode == KEY_UP)
-        vars->move.up = 1;
+        vars->player.up = 1;
     if (keycode == KEY_DOWN)
-        vars->move.down = 1;
+        vars->player.down = 1;
     return(0);
 }
 
 int ft_key_release(int keycode, t_vars *vars)
 {
   if (keycode == KEY_LEFT)
-    vars->move.left = 0;
+    vars->player.left = 0;
   if (keycode == KEY_RIGHT)
-    vars->move.right = 0;
+    vars->player.right = 0;
   if (keycode == KEY_UP)
-    vars->move.up = 0;
+    vars->player.up = 0;
   if (keycode == KEY_DOWN)
-    vars->move.down = 0;
+    vars->player.down = 0;
   return (0);
 }
 

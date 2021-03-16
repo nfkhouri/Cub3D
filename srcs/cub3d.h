@@ -13,6 +13,7 @@
 #define KEY_DOWN 65364
 #define KEY_LEFT 65361
 #define KEY_RIGHT 65363
+#define PLAYER_SIZE 5
 
 typedef struct s_img_data
 {
@@ -38,7 +39,7 @@ typedef struct s_vars
     void *mlx;
     void *mlx_win;
     t_img_data imagem;
-    t_player move;
+    t_player player;
 }   t_vars;
 
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color);

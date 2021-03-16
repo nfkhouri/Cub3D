@@ -5,26 +5,14 @@
 
 int ft_move(t_vars *vars)
 {
-    if (vars->move.left == 1 && vars->move.x > 0)
-    {
-        vars->move.x -= 1;
-        printf("x = %d, y= %d\n", vars->move.x, vars->move.y);
-    }
-    if (vars->move.right == 1 && vars->move.x + 100 < S_WIDTH)
-    {
-        vars->move.x += 1;
-        printf("x = %d, y= %d\n", vars->move.x, vars->move.y);
-    }
-    if (vars->move.up == 1 && vars->move.y > 0)
-    {
-        vars->move.y -= 1;
-        printf("x = %d, y= %d\n", vars->move.x, vars->move.y);
-    }
-    if (vars->move.down == 1 && vars->move.y + 100 < S_HEIGHT)
-    {
-        vars->move.y += 1;
-        printf("x = %d, y= %d\n", vars->move.x, vars->move.y);
-    }
+    if (vars->player.left == 1 && vars->player.x > 0)
+        vars->player.x -= 1;
+    if (vars->player.right == 1 && vars->player.x + PLAYER_SIZE < S_WIDTH)
+        vars->player.x += 1;
+    if (vars->player.up == 1 && vars->player.y > 0)
+        vars->player.y -= 1;
+    if (vars->player.down == 1 && vars->player.y + PLAYER_SIZE < S_HEIGHT)
+        vars->player.y += 1;
     return (0);
 }
 
