@@ -19,6 +19,7 @@ SRCS =		$(SRC_DIR)/main.c\
 			$(SRC_DIR)/initial_check.c\
 			$(SRC_DIR)/map_setup.c\
 			$(SRC_DIR)/map_info.c\
+			$(SRC_DIR)/close.c\
 			$(GNL_DIR)/get_next_line.c\
 			$(GNL_DIR)/get_next_line_utils.c
 

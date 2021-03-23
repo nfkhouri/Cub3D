@@ -37,18 +37,15 @@ int ft_map_file_check(t_vars *vars)
     while(get_next_line(fd, &line) == 1)
     {
         if (ft_check_line(line, vars) == -1)
-            break;
+        {
+            close(fd);
+            free(line);
+            return (-1);
+        }
         free(line);
     }
     if (ft_check_line(line, vars) == -1)
         return (-1);
-
-    // if NO, SO, EA, WE, S
-    //     ft_texture();
-    // else if C, F
-    //     ft_color();
-    // else if R
-    //     ft_res();
     close(fd);
     free(line);
     return (0);
@@ -61,7 +58,8 @@ int ft_check_line(char *line, t_vars *vars)
     i = 0;
         if ((line[i] == 'R') && line[i + 1] == ' ')
         {
-            ft_resolution(line, vars);
+            if(ft_resolution(line, vars) == -1)
+                return(-1);
         }
         else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
         {
@@ -84,7 +82,6 @@ int ft_check_line(char *line, t_vars *vars)
         }
         else {
             ft_putendl_fd("Map is not valid", 1); //Corrigir isso, pois ele tem que checar o mapa por último tb
-            free(line);
             return (-1);
         }
         return(1);

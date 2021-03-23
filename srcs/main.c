@@ -9,7 +9,10 @@ int main(int argc, char **argv)
     ft_init_structs(&vars);
     vars.mlx = mlx_init();
     if ((ft_check_args(&vars, argc, argv) < 0) || (ft_map_file_check(&vars) < 0))
+    {
+        ft_close_program(&vars);
         return(-1);
+    }
     vars.mlx_win = mlx_new_window(vars.mlx, S_WIDTH, S_HEIGHT, "Cub3D");
     vars.imagem.img = mlx_new_image(vars.mlx, S_WIDTH, S_HEIGHT);
     vars.imagem.img_addr = mlx_get_data_addr(vars.imagem.img, &vars.imagem.bits_per_pixel, &vars.imagem.line_lenght, &vars.imagem.endian);

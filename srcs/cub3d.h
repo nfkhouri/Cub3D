@@ -97,3 +97,4 @@ int ft_check_line(char *line, t_vars *vars);
 int     ft_split_numbers(char *str, int i, char **width, char **height);
 int     ft_validate_numbers(char *width, char *height);
 int     ft_resolution(char *str, t_vars *vars);
+void ft_close_program(t_vars *vars);

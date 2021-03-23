@@ -53,17 +53,22 @@ int     ft_resolution(char *str, t_vars *vars)
     int i;
 
     i = 1;
-    screen_height = 2000;
-    screen_width = 2000;
     mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
+    printf("SCREEN: %i x %i\n", screen_width, screen_height);
     ft_split_numbers(str, i, &width, &height);
     if (ft_validate_numbers(width, height) == -1)
+    {
+        free(height);
+        free(width);
         return (-1);
+    }
     vars->map_param.resolution.width = ft_atoi(width);
     vars->map_param.resolution.height = ft_atoi(height);
     if ((vars->map_param.resolution.width > screen_width)
         || (vars->map_param.resolution.height > screen_height)){
         ft_putendl_fd("Your window is too big!!!", 1);
+        free(height);
+        free(width);
         return (-1);
     }
     free(height);
