@@ -1,5 +1,4 @@
 #include "get_next_line.h"
-#include "get_next_line_bonus.h"
 #include "cub3d.h"
 #include <fcntl.h>
 
@@ -34,9 +33,7 @@ int ft_map_file_check(t_vars *vars)
     
     line = NULL;
 
-    fd = open(vars->map_param.map_path, O_RDONLY);
-	//get_next_line(fd, &line);
-    
+    fd = open(vars->map_param.map_path, O_RDONLY);    
     while(get_next_line(fd, &line) == 1)
     {
         if (ft_check_line(line, vars) == -1)
@@ -62,17 +59,19 @@ int ft_check_line(char *line, t_vars *vars)
     int i;
 
     i = 0;
-        if ((line[i] == 'R') && line[i + 1] == ' ') {
-            ft_putendl_fd("ft_res", 1);
+        if ((line[i] == 'R') && line[i + 1] == ' ')
+        {
             ft_resolution(line, vars);
         }
-        else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ') {
+        else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
+        {
             ft_putendl_fd("ft_color", 1);
         }
         else if (((line[i] == 'N' || line[i] == 'S') && line[i + 1] == 'O' && line[i + 2] == ' ')
             || (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ') 
             || (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-            || (line[i] == 'S' && line[i + 1] == ' ')) {
+            || (line[i] == 'S' && line[i + 1] == ' '))
+            {
             ft_putendl_fd("ft_textures", 1);
             }
         else if ((line[i] >= 8 && line[i] <= 13) || (line[i] == ' '))

@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/cub3d",
+            "program": "${workspaceFolder}/cub3D",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

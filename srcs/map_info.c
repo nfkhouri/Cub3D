@@ -55,7 +55,7 @@ int     ft_resolution(char *str, t_vars *vars)
     i = 1;
     screen_height = 2000;
     screen_width = 2000;
-    //mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
+    mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
     ft_split_numbers(str, i, &width, &height);
     if (ft_validate_numbers(width, height) == -1)
         return (-1);
