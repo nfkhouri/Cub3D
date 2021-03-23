@@ -1,0 +1,57 @@
+NAME = cub3d
+
+PATH_GNL = ./gnl/
+
+PATH_LIBFT = ./Libft/
+
+PATH_MLX = ./mlx_linux/
+
+PATH_OBJS = ./objs/
+
+PATH_SRCS = ./srcs/
+
+LIBFT = $(PATH_LIBFT)libft.a
+
+MLX = $(PATH_MLX)libmlx.a
+
+SRCS = $(PATH_SRCS)main.c\
+	$(PATH_SRCS)first_steps.c\
+	$(PATH_SRCS)player_move.c\
+	$(PATH_SRCS)initial_check.c\
+	$(PATH_SRCS)map_setup.c\
+	$(PATH_GNL)get_next_line_bonus.c\
+	$(PATH_GNL)get_next_line_utils_bonus.c
+
+OBJS = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS))
+
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS_MLX = -lm -lX11 -lXext -lbsd -lmlx
+FLAGS_LIBFT = -lft
+
+CC = clang $(FLAGS)
+
+$(LIBFT):
+	make -C $(PATH_LIBFT)
+
+$(MLX):
+	make -C $(PATH_MLX)
+
+HEAD = -L$(PATH_LIBFT) -I$(PATH_LIBFT) -I$(PATH_GNL) -L$(PATH_MLX) -I$(PATH_MLX)
+
+$(PATH_OBJS)%.o: $(PATH_SRCS)%.c
+	mkdir -p $(PATH_OBJS)
+	$(CC) $(HEAD) -c $< -o $@
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(HEAD) $(FLAGS_LIBFT) $(LIBFT) $(FLAGS_MLX) $(MLX) -o $(NAME)
+
+clean:
+	make clean -C $(PATH_LIBFT)
+	rm -rf $(OBJS)
+
+fclean:	clean
+		rm -rf $(NAME)
+
+re:	fclean all

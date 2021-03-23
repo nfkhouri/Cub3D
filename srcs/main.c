@@ -2,11 +2,13 @@
 #include "mlx.h"
 #include "cub3d.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
     t_vars vars;
 
-    ft_inti_structs(&vars);
+    ft_init_structs(&vars);
+    if ((ft_check_args(&vars, argc, argv) < 0) || (ft_map_file_check(&vars) < 0))
+        return(-1);
     vars.mlx = mlx_init();
     vars.mlx_win = mlx_new_window(vars.mlx, S_WIDTH, S_HEIGHT, "Cub3D");
     vars.imagem.img = mlx_new_image(vars.mlx, S_WIDTH, S_HEIGHT);

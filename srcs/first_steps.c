@@ -3,7 +3,7 @@
 #include "libft.h"
 #include <stdio.h>
 
-void ft_inti_structs(t_vars *vars)
+void ft_init_structs(t_vars *vars)
 {
     *vars = (t_vars){0};
 }
@@ -23,7 +23,6 @@ void ft_draw_in_buffer(t_vars *vars)
 
     i = 0;
     j = 0;
-    
     while(i < S_WIDTH)
     {
         while(j < S_HEIGHT)
