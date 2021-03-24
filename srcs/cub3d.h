@@ -67,7 +67,7 @@ typedef struct s_map_param
     t_texture       EA;
     t_texture       sprite;
     t_color         floor;
-    t_color         ceilling;
+    t_color         ceiling;
     char            *map_path;
 } t_map_param;
 
@@ -91,10 +91,16 @@ int main_loop(t_vars *vars);
 void ft_init_structs(t_vars *vars);
 int	ft_check_argument(char *s);
 int		ft_check_args(t_vars *vars, int argc, char **argv);
-int ft_color_check(int c);
 int ft_map_file_check(t_vars *vars);
 int ft_check_line(char *line, t_vars *vars);
 int     ft_split_numbers(char *str, int i, char **width, char **height);
 int     ft_validate_numbers(char *width, char *height);
 int     ft_resolution(char *str, t_vars *vars);
 void ft_close_program(t_vars *vars);
+int     ft_split_color(char *str,int i, char **number);
+int     ft_validate_color(char *number);
+int ft_color_check(int c);
+int         ft_colors(char *str, t_vars *vars);
+int     ft_split_path(char *str, char **path);
+int ft_path_check(char *path);
+int         ft_textures(char *str, t_vars *vars);

@@ -4,26 +4,8 @@
 
 //to do:
 // função para validar mapa:
-// R (tamanho da tela, resolução)
-// NO textura
-// SO textura
-// WE textura
-// EA textura
-// S sprite color
-// F floor color
-// C ceilling color
 // mapa rodeado de 1
 // podem ter linhas em branco, vazias, em qqr ordem, mas o mapa vem por último
-
-int ft_color_check(int c)
-{
-    if(c < 0 || c > 255)
-    {
-        ft_putstr_fd("Error in map configurations, color does not exist\n", 1);
-        //FUNÇÃO PARA FECHAR PROGRAMA!
-    }
-    return(0);
-}
 
 int ft_map_file_check(t_vars *vars)
 {
@@ -63,14 +45,16 @@ int ft_check_line(char *line, t_vars *vars)
         }
         else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
         {
-            ft_putendl_fd("ft_color", 1);
+            if(ft_colors(line, vars) == -1)
+                return(-1);
         }
         else if (((line[i] == 'N' || line[i] == 'S') && line[i + 1] == 'O' && line[i + 2] == ' ')
             || (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ') 
             || (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
             || (line[i] == 'S' && line[i + 1] == ' '))
             {
-            ft_putendl_fd("ft_textures", 1);
+            if(ft_textures(line, vars) == -1)
+            return(-1);
             }
         else if ((line[i] >= 8 && line[i] <= 13) || (line[i] == ' '))
             return(1);

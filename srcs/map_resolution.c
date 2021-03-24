@@ -20,8 +20,6 @@ int     ft_split_numbers(char *str, int i, char **width, char **height)
     while (str[i++] != ' ' && str[i] != '\0')
         len_height++;
     *height = ft_substr(str, j, len_height + 1);
-    ft_putendl_fd(*width, 1);
-    ft_putendl_fd(*height, 1);
     return (0);
 }
 
@@ -54,7 +52,6 @@ int     ft_resolution(char *str, t_vars *vars)
 
     i = 1;
     mlx_get_screen_size(vars->mlx, &screen_width, &screen_height);
-    printf("SCREEN: %i x %i\n", screen_width, screen_height);
     ft_split_numbers(str, i, &width, &height);
     if (ft_validate_numbers(width, height) == -1)
     {
