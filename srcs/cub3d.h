@@ -69,6 +69,8 @@ typedef struct s_map_param
     t_color         floor;
     t_color         ceiling;
     char            *map_path;
+    int             map_width;
+    int             map_height;
 } t_map_param;
 
 typedef struct s_vars
@@ -104,3 +106,4 @@ int         ft_colors(char *str, t_vars *vars);
 int     ft_split_path(char *str, char **path);
 int ft_path_check(char *path);
 int         ft_textures(char *str, t_vars *vars);
+int         ft_check_map(t_vars *vars);

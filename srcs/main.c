@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 
     ft_init_structs(&vars);
     vars.mlx = mlx_init();
-    if ((ft_check_args(&vars, argc, argv) < 0) || (ft_map_file_check(&vars) < 0))
+    if ((ft_check_args(&vars, argc, argv) < 0) || (ft_map_file_check(&vars) < 0) || ft_check_map(&vars))
     {
         ft_close_program(&vars);
         return(-1);

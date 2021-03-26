@@ -1,4 +1,5 @@
 #include "cub3d.h"
+#include "libft.h"
 
 int	ft_check_argument(char *s)
 {

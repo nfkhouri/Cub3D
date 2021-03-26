@@ -1,11 +1,12 @@
 NAME =		cub3D
 GNL = get_next_line
+LIBFT = $(LIBFT_DIR)/libft.a
 
-SRC_DIR = 	srcs
-MLX_DIR = 	mlx_linux
-OBJS_DIR =	objs
-GNL_DIR = gnl
-LIBFT_DIR = Libft
+SRC_DIR = 	./srcs
+MLX_DIR = 	./mlx_linux
+OBJS_DIR =	./objs
+GNL_DIR = ./gnl
+LIBFT_DIR = ./Libft
 
 CC =		clang -g -fsanitize=address
 FLAGS_CC =	-Wall -Wextra -Werror
@@ -21,6 +22,7 @@ SRCS =		$(SRC_DIR)/main.c\
 			$(SRC_DIR)/map_resolution.c\
 			$(SRC_DIR)/map_color.c\
 			$(SRC_DIR)/map_texture.c\
+			$(SRC_DIR)/map_map.c\
 			$(SRC_DIR)/close.c\
 			$(GNL_DIR)/get_next_line.c\
 			$(GNL_DIR)/get_next_line_utils.c
@@ -33,8 +35,8 @@ RM =		/bin/rm -rf
 
 all: $(NAME)
 
-$(NAME): $(MLX) $(OBJS) #$@ means the output file will be ./cub3D instead of ./a.out
-	$(CC) $(FLAGS_CC) $(OBJS) $(HEAD) $(FLAGS_MLX) $(MLX) $(FLAGS_LIBFT) $(LIBFT) -o $@
+$(NAME): $(MLX) $(LIBFT) $(OBJS) #$@ means the output file will be ./cub3D instead of ./a.out
+	$(CC) $(FLAGS_CC) $(OBJS) $(HEAD) $(FLAGS_MLX) $(FLAGS_LIBFT) -o $@
 
 $(OBJS_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJS_DIR)
@@ -44,7 +46,7 @@ $(MLX):
 	make -C $(MLX_DIR)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	make re -C $(LIBFT_DIR)
 
 clean:
 	make clean -C $(MLX_DIR)
@@ -52,6 +54,7 @@ clean:
 	$(RM) $(OBJS_DIR)
 
 fclean: clean
+	make fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
