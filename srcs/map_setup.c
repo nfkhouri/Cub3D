@@ -11,28 +11,30 @@
 int ft_map_file_check(t_vars *vars)
 {
     int     fd;
-    char    *line;
+    char    *line_2;
     int     i;
     
-    line = NULL;
+    line_2 = NULL;
 
     fd = open(vars->map_param.map_path, O_RDONLY);    
-    while(get_next_line(fd, &line) == 1)
+    while(get_next_line(fd, &line_2) == 1)
     {
-        if (ft_check_line(line, vars) == -1)
+        // ft_putstr_fd(line, 1);
+        if (ft_check_line(line_2, vars) == -1)
         {
-            close(fd);
-            free(line);
+            // close(fd);
+            free(line_2);
             return (-1);
         }
-        free(line);
+        else
+            free(line_2);
     }
-    if (ft_check_line(line, vars) == -1){
+    if (ft_check_line(line_2, vars) == -1){
         close(fd);
-        free(line);
+        free(line_2);
         return (-1);}
     close(fd);
-    free(line);
+    free(line_2);
     return (0);
 }
 
@@ -65,9 +67,9 @@ int ft_check_line(char *line, t_vars *vars)
         return(1);
     else if(line[i] == ' ' || line[i] == '1'){
         if (ft_strchr(line, '1') != 0) {
-            if (ft_strlen(line) > vars->map_param.map_width){
+            if (ft_strlen(line) > vars->map_param.map_width)
                 vars->map_param.map_width = ft_strlen(line);
-                vars->map_param.map_height++;}
+            vars->map_param.map_height++;
             return (0);
         }
     }

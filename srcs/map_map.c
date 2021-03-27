@@ -1,5 +1,6 @@
 #include "get_next_line.h"
 #include "cub3d.h"
+#include "libft.h"
 #include <fcntl.h>
 
 int         ft_check_map(t_vars *vars)
@@ -10,11 +11,11 @@ int         ft_check_map(t_vars *vars)
     int     i;
     int     gnl_result;
 
-    vars->map_param.map_path = (char*)ft_calloc((vars->map_param.map_width + 1), sizeof(char));
+    line_nbr++;
+    vars->map_param.map = (char*)ft_calloc(vars->map_param.map_width + 1, sizeof(char));
     line = NULL;
     fd = open(vars->map_param.map_path, O_RDONLY);
-    gnl_result = get_next_line(fd, &line);
-    while(gnl_result == 1)
+    while(get_next_line(fd, &line) == 1)
     {
         if (ft_strchr("NSWE\t\n\v\f\r", line[0])) {
             free(line);
@@ -27,6 +28,7 @@ int         ft_check_map(t_vars *vars)
                 line_nbr++;
             }
         }
+        free(line);
     }
     if (ft_strchr(line, '1') != 0){
         printf("%s",line);

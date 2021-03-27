@@ -1,6 +1,6 @@
 #include "mlx.h"
 #include "libft.h"
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <stdio.h>
 
 #define BUFFER_SIZE 40
@@ -69,6 +69,7 @@ typedef struct s_map_param
     t_color         floor;
     t_color         ceiling;
     char            *map_path;
+    char            *map;
     int             map_width;
     int             map_height;
 } t_map_param;

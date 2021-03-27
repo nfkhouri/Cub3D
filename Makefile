@@ -5,7 +5,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_DIR = 	./srcs
 MLX_DIR = 	./mlx_linux
 OBJS_DIR =	./objs
-GNL_DIR = ./gnl
+GNL_DIR = gnl
 LIBFT_DIR = ./Libft
 
 CC =		clang -g -fsanitize=address

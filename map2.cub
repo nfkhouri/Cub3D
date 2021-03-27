@@ -1,6 +1,4 @@
-111111
-110N01
-111111R 1280 800
+R 1280 800
 
 NO ./textures/brick.txt
 SO ./textures/metal.txt
