@@ -2,6 +2,7 @@
 #include "libft.h"
 #include "get_next_line.h"
 #include <stdio.h>
+# include <math.h>
 
 #define BUFFER_SIZE 40
 #define S_WIDTH 800
@@ -15,7 +16,7 @@
 #define KEY_DOWN 65364
 #define KEY_LEFT 65361
 #define KEY_RIGHT 65363
-#define PLAYER_SIZE 5
+#define PI 3.14159265358979323846264338327950288419
 
 typedef struct s_img_data
 {
@@ -30,10 +31,18 @@ typedef struct s_player
 {
     int x;
     int y;
+    int p_width;
+    int p_height;
     int left;
     int right;
     int up;
     int down;
+    char    direction;
+    double  rotation_angle;
+    double  walk_speed;
+    double  turn_speed;
+    int     turn_direction;
+    int     walk_direction;
 }   t_player;
 
 typedef struct s_texture
@@ -69,9 +78,12 @@ typedef struct s_map_param
     t_color         floor;
     t_color         ceiling;
     char            *map_path;
-    char            *map;
+    char            **map;
     int             map_width;
     int             map_height;
+    int             tile_width;
+    int             tile_height;
+    double          minimap_scale;
 } t_map_param;
 
 typedef struct s_vars
@@ -108,3 +120,9 @@ int     ft_split_path(char *str, char **path);
 int ft_path_check(char *path);
 int         ft_textures(char *str, t_vars *vars);
 int         ft_check_map(t_vars *vars);
+void ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2);
+int         ft_render_map(t_vars *vars);
+int     ft_render_player(t_vars *vars);
+int     ft_has_wall_at(t_vars *vars, double x, double y);
+void ft_render(t_vars *vars);
+void    ft_square(t_vars *vars, int x, int y, int height, int width, unsigned int color);

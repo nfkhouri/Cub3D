@@ -15,14 +15,13 @@ int ft_map_file_check(t_vars *vars)
     int     i;
     
     line_2 = NULL;
-
     fd = open(vars->map_param.map_path, O_RDONLY);    
     while(get_next_line(fd, &line_2) == 1)
     {
         // ft_putstr_fd(line, 1);
         if (ft_check_line(line_2, vars) == -1)
         {
-            // close(fd);
+            close(fd);
             free(line_2);
             return (-1);
         }
@@ -35,6 +34,8 @@ int ft_map_file_check(t_vars *vars)
         return (-1);}
     close(fd);
     free(line_2);
+    vars->map_param.tile_width = vars->map_param.resolution.width / vars->map_param.map_width;
+    vars->map_param.tile_height = vars->map_param.resolution.height / vars->map_param.map_height;
     return (0);
 }
 
@@ -79,9 +80,3 @@ int ft_check_line(char *line, t_vars *vars)
     }
     return(1);
 }
-
-// função para pegar informações do mapa e colocar na struct
-
-// função para mallocar uma matriz para armazenar o mapa e torná-lo quadrado
-// fazer um contador j para contar as colunas e um z, que guarda sempre o maior número
-//atingido por j na leitura do mapa para poder mallocar a matrix e "arrumar" o mapa

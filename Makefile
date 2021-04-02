@@ -24,6 +24,8 @@ SRCS =		$(SRC_DIR)/main.c\
 			$(SRC_DIR)/map_texture.c\
 			$(SRC_DIR)/map_map.c\
 			$(SRC_DIR)/close.c\
+			$(SRC_DIR)/ft_render.c\
+			$(SRC_DIR)/ft_draw_line.c\
 			$(GNL_DIR)/get_next_line.c\
 			$(GNL_DIR)/get_next_line_utils.c
 

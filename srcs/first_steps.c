@@ -6,6 +6,12 @@
 void ft_init_structs(t_vars *vars)
 {
     *vars = (t_vars){0};
+    vars->map_param.minimap_scale = 1.0;
+    vars->player.p_width = 5;
+    vars->player.p_height = 5;
+    vars->player.walk_speed = 25;
+    vars->player.turn_speed = 6 * (PI / 180);
+    
 }
 
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color)
@@ -23,9 +29,9 @@ void ft_draw_in_buffer(t_vars *vars)
 
     i = 0;
     j = 0;
-    while(i < S_WIDTH)
+    while(i < vars->map_param.resolution.width)
     {
-        while(j < S_HEIGHT)
+        while(j < vars->map_param.resolution.height)
         {
             ft_print_pixel_in_buffer(vars, i, j, 0x00000000);
             j++;
@@ -33,19 +39,26 @@ void ft_draw_in_buffer(t_vars *vars)
         j = 0;
         i++;
     }
-    i = vars->player.x;
-    j = vars->player.y;
-    while (i < vars->player.x + PLAYER_SIZE)
+  //  mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
+}
+
+void    ft_square(t_vars *vars, int x, int y, int height, int width, unsigned int color){
+    int i;
+    int j;
+
+    i = x;
+    j = y;
+    while (y < height + j)
     {
-        while (j < vars->player.y + PLAYER_SIZE)
+        while (x < width + i)
         {
-            ft_print_pixel_in_buffer(vars, i, j, 0x00FF0000);
-            j++;
+            ft_print_pixel_in_buffer(vars, x, y, color);
+            x++;
         }
-        j = vars->player.y;
-        i++;
+        x = i;
+        y++;
     }
-    mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
+   // mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
 }
 
 int ft_key_press(int keycode, t_vars *vars)
@@ -57,26 +70,26 @@ int ft_key_press(int keycode, t_vars *vars)
         exit(0);
     }
     if (keycode == KEY_LEFT)
-        vars->player.left = 1;
+        vars->player.turn_direction = -1;
     if (keycode == KEY_RIGHT)
-        vars->player.right = 1;
+        vars->player.turn_direction = 1;
     if (keycode == KEY_UP)
-        vars->player.up = 1;
+        vars->player.walk_direction = 1;
     if (keycode == KEY_DOWN)
-        vars->player.down = 1;
+        vars->player.walk_direction = -1;
     return(0);
 }
 
 int ft_key_release(int keycode, t_vars *vars)
 {
   if (keycode == KEY_LEFT)
-    vars->player.left = 0;
+    vars->player.turn_direction = 0;
   if (keycode == KEY_RIGHT)
-    vars->player.right = 0;
+    vars->player.turn_direction = 0;
   if (keycode == KEY_UP)
-    vars->player.up = 0;
+    vars->player.walk_direction = 0;
   if (keycode == KEY_DOWN)
-    vars->player.down = 0;
+    vars->player.walk_direction = 0;
   return (0);
 }
 
