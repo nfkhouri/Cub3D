@@ -1,0 +1,6 @@
+[submodule "Libft"]
+	path = Libft
+	url = https://github.com/nfkhouri/Libft.git
+[submodule "GNL"]
+	path = GNL
+	url = https://github.com/nfkhouri/GNL.git
