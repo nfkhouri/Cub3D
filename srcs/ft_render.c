@@ -11,15 +11,14 @@ int         ft_render_map(t_vars *vars){
     j = 0;
     while (i < vars->map_param.map_height){
         while (j < vars->map_param.map_width){
-            tile_x_position = j * vars->map_param.tile_width * vars->map_param.minimap_scale;
-            tile_y_position = i * vars->map_param.tile_height * vars->map_param.minimap_scale;
+            tile_x_position = j * vars->map_param.tile_width;
+            tile_y_position = i * vars->map_param.tile_height;
             if (vars->map_param.map[i][j] == '1' || vars->map_param.map[i][j] == 'X')
                 tile_color = 0x00000000;
             else if (vars->map_param.map[i][j] == '2')
                 tile_color = 0xFF0000;
             else
                 tile_color = 0xFFFFFF;
-            printf("map_param[%i][%i] = %c, %x\n", i, j, vars->map_param.map[i][j], tile_color);
             ft_square(vars, (tile_x_position * vars->map_param.minimap_scale),
                 (tile_y_position * vars->map_param.minimap_scale),
                 (vars->map_param.tile_height * vars->map_param.minimap_scale),
@@ -34,23 +33,18 @@ int         ft_render_map(t_vars *vars){
 
 int     ft_render_player(t_vars *vars){
     int color;
-    int scaled_player_x;
-    int scaled_player_y;
-    int scaled_player_width;
-    int scaled_player_height;
 
     color = 0x0000FF;
-    scaled_player_x = vars->player.x * vars->map_param.minimap_scale;
-    scaled_player_y = vars->player.y * vars->map_param.minimap_scale;
-    scaled_player_width = vars->player.p_width * vars->map_param.minimap_scale;
-    scaled_player_height = vars->player.p_height * vars->map_param.minimap_scale;
-    ft_square(vars, scaled_player_x,
-            scaled_player_y,
-            scaled_player_width,
-            scaled_player_height, color);
-    ft_draw_line(vars, scaled_player_x + (scaled_player_width / 2),
-        scaled_player_y + (scaled_player_height / 2),
-        (scaled_player_x + cos(vars->player.rotation_angle) * vars->map_param.tile_width * vars->map_param.minimap_scale),
-        (scaled_player_y + sin(vars->player.rotation_angle) * vars->map_param.tile_width * vars->map_param.minimap_scale));
+    ft_square(vars, (vars->player.x * vars->map_param.minimap_scale),
+            (vars->player.y * vars->map_param.minimap_scale),
+            (vars->player.p_width * vars->map_param.minimap_scale),
+            (vars->player.p_height * vars->map_param.minimap_scale), color);
     return (0);
+}
+
+void    ft_render_2D_rays(t_vars *vars){
+        ft_draw_line(vars, (vars->player.x + (vars->player.p_width / 2)) * vars->map_param.minimap_scale,
+        (vars->player.y + (vars->player.p_height / 2)) * vars->map_param.minimap_scale,
+        (vars->rays.wall_hit_x * vars->map_param.minimap_scale),
+        (vars->rays.wall_hit_y * vars->map_param.minimap_scale));
 }

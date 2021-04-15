@@ -134,7 +134,6 @@ int         ft_check_map(t_vars *vars)
                     return (-1);
                 }
                 check = vars->map_param.map[line_nbr];
-                printf("%s\n", vars->map_param.map[line_nbr]);
                 line_nbr++;
             }
         }
@@ -142,7 +141,6 @@ int         ft_check_map(t_vars *vars)
     }
     if (ft_strchr(line, '1') != 0){
         ft_map(line, vars, line_nbr);
-        printf("%s\n", vars->map_param.map[line_nbr]);
         line_nbr++;
     }
     close(fd);

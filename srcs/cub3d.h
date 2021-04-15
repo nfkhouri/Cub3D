@@ -43,12 +43,21 @@ typedef struct s_player
     double  turn_speed;
     int     turn_direction;
     int     walk_direction;
+    double  fov_angle;
 }   t_player;
 
 typedef struct s_texture
 {
     unsigned int    id;
-    char            *path;
+    char            *img;
+    void            *mlx;
+    int             w;
+    int             h;
+    int             bpp;
+    int             line_length;
+    int             endian;
+    int             set;
+
 } t_texture;
 
 typedef struct s_resolution
@@ -86,6 +95,30 @@ typedef struct s_map_param
     double          minimap_scale;
 } t_map_param;
 
+typedef struct  s_rays
+{
+    
+    double          num_of;
+    double          size_of;
+    double          distance; //distance between player and wall hit
+    double          wall_hit_x;
+    double          wall_hit_y;
+    double          wall_hit_content;
+    double          was_hit_vertical;
+    double          ray_angle;
+    int             is_facing_down;
+    int             is_facing_up;
+    int             is_facing_left;
+    int             is_facing_right;
+    double          horz_hit_distance;
+    double          vert_hit_distance;
+    double          horz_wall_hit_x;
+    double          horz_wall_hit_y;
+    double          vert_wall_hit_x;
+    double          vert_wall_hit_y;
+    double          column_id;
+}               t_rays;
+
 typedef struct s_vars
 {
     void            *mlx;
@@ -93,6 +126,9 @@ typedef struct s_vars
     t_img_data      imagem;
     t_player        player;
     t_map_param     map_param;
+    t_rays          rays;
+    t_texture       *tex;
+    char            *tex_path[5];
 }   t_vars;
 
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color);
@@ -120,9 +156,16 @@ int     ft_split_path(char *str, char **path);
 int ft_path_check(char *path);
 int         ft_textures(char *str, t_vars *vars);
 int         ft_check_map(t_vars *vars);
-void ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2);
+int     ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2);
 int         ft_render_map(t_vars *vars);
 int     ft_render_player(t_vars *vars);
 int     ft_has_wall_at(t_vars *vars, double x, double y);
 void ft_render(t_vars *vars);
 void    ft_square(t_vars *vars, int x, int y, int height, int width, unsigned int color);
+double      ft_normalize_angle(double angle);
+double      ft_distance_between_points(double x1, double y1, double x2, double y2);
+void        ft_cast_all_rays(t_vars *vars);
+void        ft_cast_3D_rays(t_vars *vars);
+void    ft_free_all(t_vars *vars);
+void    ft_render_2D_rays(t_vars *vars);
+void ft_init_rays(t_vars *vars);

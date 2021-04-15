@@ -33,22 +33,19 @@ int     ft_has_wall_at(t_vars *vars, double x, double y){
         || y < 0 || y + vars->player.p_height > vars->map_param.resolution.height) {
             return (1);
         }
-    i = floor((x + vars->player.p_width) / vars->map_param.tile_width);
-    j = floor((y + vars->player.p_height) / vars->map_param.tile_height);
-    // printf("%i\n", i);
-    // printf("%i\n", j);
-    // printf("%c\n\n", vars->map[j][i]);
+    i = floor(x / vars->map_param.tile_width);
+    j = floor(y / vars->map_param.tile_height);
     value = vars->map_param.map[j][i] != '0';
     return (value);
 }
 
 void ft_render(t_vars *vars){
     ft_draw_in_buffer(vars);
+    ft_cast_3D_rays(vars);
     ft_render_map(vars);
     ft_render_player(vars);
+    ft_cast_all_rays(vars);
     mlx_put_image_to_window(vars->mlx, vars->mlx_win, vars->imagem.img, 0, 0);
-    //todo render rays
-    //todo render player.player
 }
 
 int main_loop(t_vars *vars)

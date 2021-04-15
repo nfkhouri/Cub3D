@@ -26,6 +26,8 @@ SRCS =		$(SRC_DIR)/main.c\
 			$(SRC_DIR)/close.c\
 			$(SRC_DIR)/ft_render.c\
 			$(SRC_DIR)/ft_draw_line.c\
+			$(SRC_DIR)/raycasting.c\
+			$(SRC_DIR)/angles.c\
 			$(GNL_DIR)/get_next_line.c\
 			$(GNL_DIR)/get_next_line_utils.c
 

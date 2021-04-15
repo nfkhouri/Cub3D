@@ -6,12 +6,20 @@
 void ft_init_structs(t_vars *vars)
 {
     *vars = (t_vars){0};
-    vars->map_param.minimap_scale = 1.0;
+    vars->map_param.minimap_scale = 0.3;
     vars->player.p_width = 5;
     vars->player.p_height = 5;
-    vars->player.walk_speed = 25;
+    vars->player.walk_speed = 10;
     vars->player.turn_speed = 6 * (PI / 180);
-    
+    vars->player.fov_angle = 60 * (PI / 180);
+    vars->rays.num_of = vars->map_param.resolution.width;
+    vars->rays.size_of = vars->map_param.resolution.width / vars->player.fov_angle;
+}
+
+void ft_init_rays(t_vars *vars)
+{
+    vars->rays.num_of = vars->map_param.resolution.width;
+    vars->rays.size_of = vars->map_param.resolution.width / vars->player.fov_angle;
 }
 
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color)

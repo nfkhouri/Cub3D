@@ -13,6 +13,7 @@ int main(int argc, char **argv)
         ft_close_program(&vars);
         return(-1);
     }
+    ft_init_rays(&vars);
     vars.mlx_win = mlx_new_window(vars.mlx, vars.map_param.resolution.width, vars.map_param.resolution.height, "Cub3D");
     vars.imagem.img = mlx_new_image(vars.mlx, vars.map_param.resolution.width, vars.map_param.resolution.height);
     vars.imagem.img_addr = mlx_get_data_addr(vars.imagem.img, &vars.imagem.bits_per_pixel, &vars.imagem.line_lenght, &vars.imagem.endian);

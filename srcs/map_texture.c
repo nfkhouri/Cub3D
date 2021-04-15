@@ -41,16 +41,16 @@ int         ft_textures(char *str, t_vars *vars) {
         return (-1);
     }
     if (str[0] == 'N')
-        vars->map_param.NO.path = ft_strdup(path);
+        vars->tex_path[0] = ft_strdup(path);
     else if (str[0] == 'W')
-        vars->map_param.WE.path = ft_strdup(path);
+        vars->tex_path[3] = ft_strdup(path);
     else if (str[0] == 'E')
-        vars->map_param.EA.path = ft_strdup(path);
+        vars->tex_path[2] = ft_strdup(path);
     else {
         if (str[1] == 'O')
-            vars->map_param.SO.path = ft_strdup(path);
+            vars->tex_path[1] = ft_strdup(path);
         else
-            vars->map_param.sprite.path = ft_strdup(path);
+            vars->tex_path[4] = ft_strdup(path);
     }
     free(path);
     return (0);
