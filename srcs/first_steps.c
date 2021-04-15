@@ -14,6 +14,7 @@ void ft_init_structs(t_vars *vars)
     vars->player.fov_angle = 60 * (PI / 180);
     vars->rays.num_of = vars->map_param.resolution.width;
     vars->rays.size_of = vars->map_param.resolution.width / vars->player.fov_angle;
+    vars->tex = (t_texture *)ft_calloc(5, sizeof(t_texture));
 }
 
 void ft_init_rays(t_vars *vars)

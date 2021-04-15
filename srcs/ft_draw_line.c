@@ -5,16 +5,14 @@ void    ft_large_slope(t_vars *vars, int slope_sign, int x1, int y1, int x2, int
     int P;
     int dx;
     int dy;
-    int color;
 
     dx = x2 - x1;
     dy = abs(y2 - y1);
-    color = 0x00FF0000;
     P = (2 * dx) - dy;
     if (y1 < y2){
         while(y1 <= y2)
         {
-            ft_print_pixel_in_buffer(vars, x1, y1, color);
+            ft_print_pixel_in_buffer(vars, x1, y1, vars->color);
             y1++;
             if(P < 0)
                 P += 2 * dx;
@@ -28,7 +26,7 @@ void    ft_large_slope(t_vars *vars, int slope_sign, int x1, int y1, int x2, int
     {
         while(y2 <= y1)
         {
-            ft_print_pixel_in_buffer(vars, x1, y1, color);
+            ft_print_pixel_in_buffer(vars, x1, y1, vars->color);
             y1--;
             if(P < 0)
                 P += 2 * dx;
@@ -45,15 +43,13 @@ void    ft_small_slope(t_vars *vars, int slope_sign, int x1, int y1, int x2, int
     int P;
     int dx;
     int dy;
-    int color;
 
     dx = x2 - x1;
     dy = abs(y2 - y1);
-    color = 0x00FF0000;
     P = (2 * dy) - dx;
     while(x1 <= x2)
     {
-        ft_print_pixel_in_buffer(vars, x1, y1, color);
+        ft_print_pixel_in_buffer(vars, x1, y1, vars->color);
         x1++;
         if(P < 0)
             P += 2 * dy;
@@ -71,10 +67,8 @@ int     ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2)
     int dx;
     int dy;
     int slope; //slope >1 = 1, slope <1 = 0
-    int slope_sign; //negative slope = -1, positive slope = 1;
-    int color;
+    int slope_sign; //negative slope = -1, positive slope = 1
 
-    color = 0x00FF0000;
     dx = x2 - x1;
     dy = y2 - y1;
     if (dx == 0)
@@ -92,7 +86,7 @@ int     ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2)
             y = y1; 
         }
         while (y < y2){
-            ft_print_pixel_in_buffer(vars, x, y, color);
+            ft_print_pixel_in_buffer(vars, x, y, vars->color);
             y++;
         }
         return (0);
@@ -112,7 +106,7 @@ int     ft_draw_line(t_vars *vars, int x1, int y1, int x2, int y2)
             y = y1; 
         }
         while (x < x2){
-            ft_print_pixel_in_buffer(vars, x, y, color);
+            ft_print_pixel_in_buffer(vars, x, y, vars->color);
             x++;
         }
         return (0);

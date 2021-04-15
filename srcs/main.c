@@ -4,8 +4,10 @@
 
 int main(int argc, char **argv)
 {
-    t_vars vars;
+    t_vars  vars;
+    int     i;
 
+    i = -1;
     ft_init_structs(&vars);
     vars.mlx = mlx_init();
     if ((ft_check_args(&vars, argc, argv) < 0) || (ft_map_file_check(&vars) < 0) || ft_check_map(&vars))
@@ -13,6 +15,8 @@ int main(int argc, char **argv)
         ft_close_program(&vars);
         return(-1);
     }
+    while (++i < 5)
+        ft_load_textures(&vars, i);
     ft_init_rays(&vars);
     vars.mlx_win = mlx_new_window(vars.mlx, vars.map_param.resolution.width, vars.map_param.resolution.height, "Cub3D");
     vars.imagem.img = mlx_new_image(vars.mlx, vars.map_param.resolution.width, vars.map_param.resolution.height);

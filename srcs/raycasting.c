@@ -2,28 +2,43 @@
 #include "libft.h"
 #include <fcntl.h>
 
-void        ft_render_3D_rays(t_vars *strct)
+void        ft_render_3D_rays(t_vars *vars, double ray_angle)
 {
     double  wall_strip_height;
     double  distance_proj_plane;
     int     wall_top_pixel;
     int     wall_bottom_pixel;
+    int     i;
     
     //calculate the distance to the projection plane
-    distance_proj_plane = (strct->map_param.resolution.width / 2)
-        / tan(strct->player.fov_angle / 2);
+    distance_proj_plane = (vars->map_param.resolution.width / 2)
+        / tan(vars->player.fov_angle / 2);
     //projected wall height
-    wall_strip_height = (strct->map_param.tile_height / strct->rays.distance)
+    wall_strip_height = (vars->map_param.tile_height / (vars->rays.distance
+        * cos(ray_angle - vars->player.rotation_angle)))
         * distance_proj_plane;
-    wall_top_pixel = (strct->map_param.resolution.height / 2) - (wall_strip_height / 2);
+    wall_top_pixel = (vars->map_param.resolution.height / 2) - (wall_strip_height / 2);
     wall_top_pixel = (wall_top_pixel < 0) ? 0 : wall_top_pixel;
-    wall_bottom_pixel = (strct->map_param.resolution.height / 2) + (wall_strip_height / 2);
-    wall_bottom_pixel = (wall_bottom_pixel > strct->map_param.resolution.height)
-        ? strct->map_param.resolution.height : wall_bottom_pixel;
-    ft_draw_line(strct, strct->rays.column_id,
-        wall_top_pixel,
-        strct->rays.column_id,
-        wall_bottom_pixel);
+    wall_bottom_pixel = (vars->map_param.resolution.height / 2) + (wall_strip_height / 2);
+    wall_bottom_pixel = (wall_bottom_pixel > vars->map_param.resolution.height)
+        ? vars->map_param.resolution.height : wall_bottom_pixel;
+    i = ft_which_texture(vars, ray_angle);
+    vars->color = 0x8A2BE2;
+    ft_draw_line(vars, vars->rays.column_id,
+        0,
+        vars->rays.column_id,
+        wall_top_pixel);
+    ft_draw_texture(vars, wall_top_pixel, wall_bottom_pixel, wall_strip_height, i);
+    // vars->color = 0xFFB6C1;
+    // ft_draw_line(vars, vars->rays.column_id,
+    //     wall_top_pixel,
+    //     vars->rays.column_id,
+    //     wall_bottom_pixel);
+    //     vars->color = 0x964B00;
+    ft_draw_line(vars, vars->rays.column_id,
+        wall_bottom_pixel,
+        vars->rays.column_id,
+        vars->map_param.resolution.height);
 }
 
 void        ft_horizontal_check(t_vars *vars, double ray_angle)
@@ -159,22 +174,7 @@ void        ft_cast_ray(t_vars *vars, double ray_angle)
     vars->rays.distance = (vars->rays.horz_hit_distance < vars->rays.vert_hit_distance)
         ? vars->rays.horz_hit_distance : vars->rays.vert_hit_distance;
     vars->rays.was_hit_vertical = (vars->rays.vert_hit_distance < vars->rays.horz_hit_distance);
-    // ray_x = (vars->player.scaled_x + cos(ray_angle) * 50 * vars->minimap_scale);
-    // ray_y = (vars->player.scaled_y + sin(ray_angle) * 50 * vars->minimap_scale);
-    // test = vars->window_width - vars->map_param.tile_width;
-    // if (ray_x >= test)
-    //     ray_x = vars->window_width - vars->map_param.tile_width - 1;
-    // if (ray_x <= vars->map_param.tile_width)
-    //     ray_x = vars->map_param.tile_width + 1;
-    // if (ray_y >= vars->window_height - vars->tile_Y)
-    //     ray_y = vars->window_height - vars->tile_Y - 1;
-    // if (ray_y <= vars->tile_Y)
-    //     ray_y = vars->tile_Y + 1;
-    // printf("rotation angle in cast_ray: %f\n\n", vars->player.rotation_angle);
-    // ft_draw_line(vars, vars->player.scaled_x + (vars->player.scaled_width / 2),
-    //     vars->player.scaled_y + (vars->player.scaled_height / 2),
-    //     (vars->player.scaled_x + cos(vars->player.rotation_angle) * 50 * vars->minimap_scale),
-    //     (vars->player.scaled_y + sin(vars->player.rotation_angle) * 50 * vars->minimap_scale));
+    vars->color = 0xCBC3E3;
     ft_draw_line(vars, ((vars->player.x + (vars->player.p_width / 2)) * vars->map_param.minimap_scale),
         ((vars->player.y + (vars->player.p_height / 2)) * vars->map_param.minimap_scale),
         (vars->rays.wall_hit_x * vars->map_param.minimap_scale),
@@ -215,7 +215,7 @@ void        ft_cast_3D_rays(t_vars *vars)
         vars->rays.is_facing_right = (ray_angle < (PI / 2)) || (ray_angle > (1.5 * PI));
         vars->rays.is_facing_left = (vars->rays.is_facing_right == 0) ? 1 : 0;
         ft_cast_ray(vars, ray_angle);
-        ft_render_3D_rays(vars);
+        ft_render_3D_rays(vars, ray_angle);
         ray_angle += vars->player.fov_angle / vars->rays.num_of;
         vars->rays.column_id++;
     }

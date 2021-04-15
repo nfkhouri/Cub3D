@@ -129,6 +129,7 @@ typedef struct s_vars
     t_rays          rays;
     t_texture       *tex;
     char            *tex_path[5];
+    int             color;
 }   t_vars;
 
 void ft_print_pixel_in_buffer(t_vars *vars, int x, int y, int color);
@@ -169,3 +170,7 @@ void        ft_cast_3D_rays(t_vars *vars);
 void    ft_free_all(t_vars *vars);
 void    ft_render_2D_rays(t_vars *vars);
 void ft_init_rays(t_vars *vars);
+int         ft_which_texture(t_vars *vars, double ray_angle);
+int         ft_load_textures(t_vars *vars, int i);
+void        ft_draw_texture(t_vars *vars, int top_pixel, int bottom_pixel, double wall_strip_height, int i);
+int			ft_get_tex_pixel(t_vars *vars, int x, int y, int index);
